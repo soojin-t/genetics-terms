@@ -1,0 +1,1412 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>유전 용어 마스터</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gothic+A1:wght@400;600;800&display=swap">
+<style>
+  :root{
+    --bg:#F1F6EA; --surface:#FFFFFF; --surface-2:#FAFCF5;
+    --ink:#16251A; --muted:#5C6F5F; --edge:#16251A;
+    --pea:#4FA22F; --pea-soft:#DDF0CE;
+    --blossom:#F4538A; --blossom-soft:#FFE2EC;
+    --pollen:#FFC02E; --pollen-soft:#FFF1C9;
+    --good:#1E9E63; --good-soft:#D9F3E5;
+    --bad:#DD4B2B; --bad-soft:#FCE0D8;
+    --line:#D2E2C6;
+    --shadow:4px 5px 0 var(--edge);
+    --shadow-sm:3px 3px 0 var(--edge);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#121A13; --surface:#1C271D; --surface-2:#222E22;
+      --ink:#E9F2E4; --muted:#9BB09C; --edge:#080D08;
+      --pea:#79D155; --pea-soft:#2C4424;
+      --blossom:#FF7FAA; --blossom-soft:#4A2130;
+      --pollen:#FFD35E; --pollen-soft:#4A3A15;
+      --good:#48C98A; --good-soft:#1E4030;
+      --bad:#FF7A57; --bad-soft:#4A2418;
+      --line:#33432F;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#121A13; --surface:#1C271D; --surface-2:#222E22;
+    --ink:#E9F2E4; --muted:#9BB09C; --edge:#080D08;
+    --pea:#79D155; --pea-soft:#2C4424;
+    --blossom:#FF7FAA; --blossom-soft:#4A2130;
+    --pollen:#FFD35E; --pollen-soft:#4A3A15;
+    --good:#48C98A; --good-soft:#1E4030;
+    --bad:#FF7A57; --bad-soft:#4A2418;
+    --line:#33432F;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Gothic A1","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    font-size:16px; line-height:1.6;
+    -webkit-text-size-adjust:100%;
+  }
+  h1,h2,h3,.display{font-family:"Black Han Sans","Gothic A1",sans-serif; font-weight:400; letter-spacing:.01em;}
+  .app{max-width:960px; margin:0 auto; padding:0 16px; padding-block:0 40px;}
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    position:sticky; top:env(safe-area-inset-top,0px); z-index:30;
+    background:var(--bg); border-bottom:3px solid var(--edge);
+    margin:0 -16px 20px; padding:10px 16px;
+    display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  }
+  .brand{display:flex; align-items:center; gap:8px; margin-right:auto;}
+  .brand .pod{width:30px; height:30px; flex:none;}
+  .brand b{font-family:"Black Han Sans",sans-serif; font-weight:400; font-size:1.05rem; letter-spacing:.02em;}
+  .chip{
+    display:inline-flex; align-items:center; gap:6px;
+    border:2.5px solid var(--edge); border-radius:999px;
+    background:var(--surface); padding:3px 11px;
+    font-size:.8rem; font-weight:800; white-space:nowrap;
+  }
+  .chip.pea{background:var(--pea-soft)}
+  .chip.pollen{background:var(--pollen-soft)}
+  .chip.blossom{background:var(--blossom-soft)}
+  .chip b{font-family:"Black Han Sans",sans-serif; font-weight:400; font-size:.95rem; font-variant-numeric:tabular-nums;}
+
+  /* ---------- shared bits ---------- */
+  .panel{
+    background:var(--surface); border:3px solid var(--edge);
+    border-radius:20px; box-shadow:var(--shadow); padding:22px;
+  }
+  .btn{
+    font-family:"Black Han Sans",sans-serif; font-weight:400;
+    font-size:1.02rem; letter-spacing:.02em;
+    border:3px solid var(--edge); border-radius:14px;
+    background:var(--pollen); color:var(--ink);
+    box-shadow:var(--shadow); padding:11px 20px;
+    cursor:pointer; transition:transform .08s, box-shadow .08s;
+  }
+  .btn:hover{transform:translate(1px,1px); box-shadow:var(--shadow-sm)}
+  .btn:active{transform:translate(4px,5px); box-shadow:0 0 0 var(--edge)}
+  .btn.pea{background:var(--pea); color:#fff}
+  .btn.blossom{background:var(--blossom); color:#fff}
+  .btn.ghost{background:var(--surface)}
+  .btn[disabled]{opacity:.45; cursor:not-allowed; transform:none; box-shadow:var(--shadow-sm)}
+  .btn:focus-visible, .card:focus-visible, input:focus-visible, .opt:focus-visible{
+    outline:3px solid var(--blossom); outline-offset:3px;
+  }
+  .eyebrow{
+    font-size:.72rem; font-weight:800; letter-spacing:.14em;
+    color:var(--muted); text-transform:uppercase;
+  }
+  .muted{color:var(--muted)}
+  .stack{display:flex; flex-direction:column; gap:14px}
+  .row{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+  .center{text-align:center}
+
+  /* ---------- intro ---------- */
+  .hero{text-align:center; padding:8px 0 4px}
+  .hero .pod{width:82px; height:82px}
+  .hero h1{
+    font-size:clamp(1.9rem,7vw,2.9rem); margin:6px 0 4px;
+    text-wrap:balance; line-height:1.15;
+  }
+  .hero h1 em{font-style:normal; color:var(--pea)}
+  .hero p{margin:0; color:var(--muted); font-size:.95rem}
+  .field{display:flex; flex-direction:column; gap:6px}
+  .field label{font-size:.82rem; font-weight:800; letter-spacing:.02em}
+  .field input{
+    font-family:inherit; font-size:1rem; font-weight:600;
+    border:3px solid var(--edge); border-radius:12px;
+    background:var(--surface-2); color:var(--ink);
+    padding:10px 13px; width:100%;
+  }
+  .field input::placeholder{color:var(--muted); font-weight:400}
+  .grid2{display:grid; grid-template-columns:1fr 1.4fr; gap:12px}
+  @media (max-width:480px){ .grid2{grid-template-columns:1fr} }
+
+  .termstrip{display:flex; flex-wrap:wrap; gap:6px; justify-content:center}
+  .term-chip{
+    border:2.5px solid var(--edge); border-radius:999px;
+    background:var(--pea-soft); padding:3px 10px;
+    font-size:.78rem; font-weight:800;
+  }
+
+  /* ---------- hub ---------- */
+  .hub{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+  @media (max-width:640px){ .hub{grid-template-columns:1fr} }
+  .gamecard{
+    background:var(--surface); border:3px solid var(--edge); border-radius:20px;
+    box-shadow:var(--shadow); padding:20px; text-align:left;
+    display:flex; flex-direction:column; gap:10px; cursor:pointer;
+    font:inherit; color:inherit; transition:transform .1s, box-shadow .1s;
+  }
+  .gamecard:hover{transform:translate(2px,2px); box-shadow:var(--shadow-sm)}
+  .gamecard .num{
+    font-family:"Black Han Sans",sans-serif; font-size:.8rem;
+    border:2.5px solid var(--edge); border-radius:999px;
+    padding:2px 10px; align-self:flex-start; background:var(--pollen-soft);
+  }
+  .gamecard h3{font-size:1.35rem; margin:0}
+  .gamecard p{margin:0; font-size:.88rem; color:var(--muted); line-height:1.55}
+  .gamecard .state{
+    margin-top:2px; font-size:.82rem; font-weight:800;
+    display:flex; align-items:center; gap:7px;
+  }
+  .dot{width:11px; height:11px; border-radius:50%; border:2.5px solid var(--edge); background:var(--surface-2); flex:none}
+  .dot.on{background:var(--good)}
+
+  /* ---------- match game ---------- */
+  .board{display:grid; gap:11px; grid-template-columns:repeat(4,1fr)}
+  .board.cols5{grid-template-columns:repeat(5,1fr)}
+  @media (max-width:760px){ .board, .board.cols5{grid-template-columns:repeat(3,1fr)} }
+  @media (max-width:520px){ .board, .board.cols5{grid-template-columns:repeat(2,1fr)} }
+  .card{
+    position:relative; aspect-ratio:1/1.18; min-height:118px;
+    border:0; background:none; padding:0; cursor:pointer;
+    perspective:900px; font:inherit; color:inherit;
+  }
+  .card-inner{
+    position:absolute; inset:0; transform-style:preserve-3d;
+    transition:transform .45s cubic-bezier(.4,.9,.3,1.2);
+  }
+  .card.flipped .card-inner{transform:rotateY(180deg)}
+  .face{
+    position:absolute; inset:0; backface-visibility:hidden;
+    border:3px solid var(--edge); border-radius:15px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:5px; padding:9px; overflow:hidden; text-align:center;
+  }
+  .face.back{background:var(--pea-soft); box-shadow:var(--shadow-sm)}
+  .face.back .pod{width:44%; max-width:52px}
+  .face.front{transform:rotateY(180deg); background:var(--surface)}
+  .face.front.term{background:var(--pollen-soft)}
+  .face.front.def{background:var(--surface)}
+  .face .kind{
+    font-size:.6rem; font-weight:800; letter-spacing:.12em;
+    color:var(--muted); text-transform:uppercase;
+  }
+  .face .word{
+    font-family:"Black Han Sans",sans-serif; font-weight:400;
+    font-size:clamp(1.05rem,4.3vw,1.4rem); line-height:1.2;
+  }
+  .face .defn{
+    font-size:clamp(.71rem,2.55vw,.83rem); line-height:1.4;
+    font-weight:600; word-break:keep-all;
+  }
+  .card.matched .face.front{background:var(--good-soft); border-color:var(--good)}
+  .card.matched{cursor:default; animation:pop .35s ease}
+  .card.shake .card-inner{animation:shake .4s ease}
+  @keyframes pop{0%{transform:scale(1)}45%{transform:scale(1.06)}100%{transform:scale(1)}}
+  @keyframes shake{0%,100%{translate:0}25%{translate:-5px}75%{translate:5px}}
+
+  .previewbar{
+    display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+    border:3px solid var(--edge); border-radius:16px; background:var(--pollen-soft);
+    box-shadow:var(--shadow-sm); padding:12px 15px; margin-bottom:14px;
+  }
+  .previewbar .ptext{margin-right:auto; line-height:1.3}
+  .previewbar .ptext strong{
+    display:block; font-family:"Black Han Sans",sans-serif; font-weight:400; font-size:1.05rem;
+  }
+  .previewbar .timer{margin:0; flex-basis:100%; height:12px}
+  .previewbar .timer i{background:var(--blossom)}
+
+  .roundbar{display:flex; gap:7px; align-items:center; flex-wrap:wrap; margin-bottom:14px}
+  .pip{
+    width:30px; height:30px; border:3px solid var(--edge); border-radius:10px;
+    background:var(--surface); display:grid; place-items:center;
+    font-family:"Black Han Sans",sans-serif; font-size:.85rem;
+  }
+  .pip.now{background:var(--pollen)}
+  .pip.done{background:var(--pea); color:#fff}
+
+  /* ---------- quiz ---------- */
+  .qhead{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:12px}
+  .timer{
+    height:14px; border:3px solid var(--edge); border-radius:999px;
+    background:var(--surface-2); overflow:hidden; margin-bottom:18px;
+  }
+  .timer i{display:block; height:100%; width:100%; background:var(--pea)}
+  .timer.warn i{background:var(--bad)}
+  .qtext{
+    font-family:"Black Han Sans",sans-serif; font-weight:400;
+    font-size:clamp(1.1rem,4.4vw,1.5rem); line-height:1.45;
+    word-break:keep-all; text-wrap:balance; margin:0 0 18px;
+  }
+  .opts{display:grid; gap:10px}
+  .opts.ox{grid-template-columns:1fr 1fr}
+  .opt{
+    font:inherit; font-weight:800; text-align:left; cursor:pointer;
+    border:3px solid var(--edge); border-radius:14px; background:var(--surface);
+    box-shadow:var(--shadow-sm); padding:14px 16px; color:inherit;
+    display:flex; align-items:center; gap:11px; word-break:keep-all;
+    transition:transform .08s, box-shadow .08s;
+  }
+  .opt:hover:not([disabled]){transform:translate(1px,1px); box-shadow:2px 2px 0 var(--edge)}
+  .opt .badge{
+    width:28px; height:28px; flex:none; border-radius:50%;
+    border:2.5px solid var(--edge); background:var(--pollen-soft);
+    display:grid; place-items:center;
+    font-family:"Black Han Sans",sans-serif; font-size:.85rem;
+  }
+  .opts.ox .opt{
+    flex-direction:column; gap:4px; align-items:center; text-align:center;
+    padding:22px 12px; font-family:"Black Han Sans",sans-serif; font-weight:400;
+    font-size:1.8rem;
+  }
+  .opts.ox .opt small{font-family:"Gothic A1",sans-serif; font-weight:800; font-size:.8rem; color:var(--muted)}
+  .opt.correct{background:var(--good-soft); border-color:var(--good)}
+  .opt.wrong{background:var(--bad-soft); border-color:var(--bad)}
+  .opt[disabled]{cursor:default}
+  .feedback{
+    margin-top:16px; border:3px solid var(--edge); border-radius:14px;
+    padding:12px 15px; font-size:.87rem; font-weight:600; line-height:1.5;
+    word-break:keep-all;
+  }
+  .feedback.ok{background:var(--good-soft)}
+  .feedback.no{background:var(--bad-soft)}
+  .feedback b{font-family:"Black Han Sans",sans-serif; font-weight:400}
+  .combo{
+    font-family:"Black Han Sans",sans-serif; font-size:.9rem;
+    color:var(--blossom); min-width:64px;
+  }
+
+  /* ---------- summary / result ---------- */
+  .scoreboard{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
+  @media (max-width:560px){ .scoreboard{grid-template-columns:1fr} }
+  .scorebox{
+    border:3px solid var(--edge); border-radius:16px; padding:15px;
+    background:var(--surface-2); text-align:center;
+  }
+  .scorebox .v{
+    font-family:"Black Han Sans",sans-serif; font-size:2.1rem; line-height:1.1;
+    font-variant-numeric:tabular-nums; display:block;
+  }
+  .scorebox .k{font-size:.78rem; font-weight:800; color:var(--muted)}
+  .scorebox.big{background:var(--pollen-soft); grid-column:1/-1}
+  .scorebox.big .v{font-size:3.3rem; color:var(--pea)}
+  .rank{
+    display:inline-block; border:3px solid var(--edge); border-radius:999px;
+    background:var(--blossom); color:#fff; padding:5px 18px;
+    font-family:"Black Han Sans",sans-serif; font-size:1.15rem; box-shadow:var(--shadow-sm);
+  }
+  .histwrap{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+  @media (max-width:560px){ .histwrap{grid-template-columns:1fr} }
+  .histwrap h4{
+    margin:0 0 8px; font-family:"Black Han Sans",sans-serif; font-weight:400; font-size:1.02rem;
+  }
+  .histlist{display:flex; flex-direction:column; gap:6px}
+  .histrow{
+    display:flex; align-items:center; gap:9px;
+    border:2.5px solid var(--line); border-radius:11px; padding:7px 12px;
+    background:var(--surface-2); font-size:.85rem; font-weight:800;
+  }
+  .histrow.best{border-color:var(--pea); background:var(--pea-soft)}
+  .histrow .tag{
+    font-size:.68rem; border:2px solid var(--edge); border-radius:999px;
+    padding:1px 8px; background:var(--pollen); color:var(--ink);
+  }
+  .histrow .s{
+    margin-left:auto; font-family:"Black Han Sans",sans-serif; font-weight:400;
+    font-size:1.05rem; font-variant-numeric:tabular-nums;
+  }
+  .gamecard .state{flex-wrap:wrap}
+
+  .wronglist{display:flex; flex-direction:column; gap:9px; margin-top:6px}
+  .wrongitem{
+    border:2.5px solid var(--line); border-left:7px solid var(--bad);
+    border-radius:11px; padding:10px 13px; background:var(--surface-2);
+    font-size:.85rem; line-height:1.5; word-break:keep-all;
+  }
+  .wrongitem b{font-family:"Black Han Sans",sans-serif; font-weight:400; color:var(--pea)}
+  .preview{width:100%; height:auto; border:3px solid var(--edge); border-radius:14px; display:block}
+
+  /* 용어 노트 */
+  .glossgroup{margin-bottom:16px}
+  .glossgroup:last-child{margin-bottom:0}
+  .glossgroup > .eyebrow{display:block; margin-bottom:8px}
+  .glossitem{
+    display:grid; grid-template-columns:118px 1fr; gap:12px; align-items:baseline;
+    border-bottom:2px dashed var(--line); padding:9px 2px;
+  }
+  .glossitem:last-child{border-bottom:0}
+  @media (max-width:440px){
+    .glossitem{grid-template-columns:1fr; gap:2px}
+  }
+  .glossitem .gt{
+    font-family:"Black Han Sans",sans-serif; font-weight:400; font-size:1.05rem;
+    color:var(--pea); display:flex; align-items:center; gap:6px; flex-wrap:wrap;
+  }
+  .glossitem .gd{font-size:.87rem; line-height:1.55; word-break:keep-all}
+
+  .toast{
+    position:fixed; left:50%; bottom:26px; transform:translateX(-50%);
+    background:var(--ink); color:var(--bg); padding:11px 20px;
+    border-radius:999px; font-weight:800; font-size:.88rem; z-index:90;
+    box-shadow:var(--shadow-sm); max-width:90vw; text-align:center;
+  }
+  .modal{
+    position:fixed; inset:0; z-index:80; background:rgba(10,18,10,.62);
+    display:grid; place-items:center; padding:18px;
+  }
+  .modal .panel{max-width:520px; width:100%; max-height:88vh; overflow:auto}
+
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation-duration:.01ms!important; transition-duration:.01ms!important}
+  }
+</style>
+
+<div class="app">
+  <div class="topbar">
+    <div class="brand">
+      <svg class="pod" viewBox="0 0 56 56" aria-hidden="true"><path d="M10 46C4 32 14 12 30 7c8-2.5 16-1 19 3-3 3-4 8-3 14 2 12-8 26-20 30-8 2.7-13.5 0-16-8z" fill="var(--pea)" stroke="var(--edge)" stroke-width="3" stroke-linejoin="round"/><circle cx="19" cy="37" r="5.2" fill="var(--pollen)" stroke="var(--edge)" stroke-width="2.4"/><circle cx="27" cy="27" r="5.2" fill="var(--pollen)" stroke="var(--edge)" stroke-width="2.4"/><circle cx="35" cy="17" r="5.2" fill="var(--pollen)" stroke="var(--edge)" stroke-width="2.4"/></svg>
+      <b>유전 용어 마스터</b>
+    </div>
+    <span class="chip pea" id="chipPlayer" hidden></span>
+    <span class="chip pollen" id="chipScore" hidden>총점 <b>0</b></span>
+  </div>
+
+  <!-- ========== INTRO ========== -->
+  <section id="scIntro">
+    <div class="hero">
+      <svg class="pod" viewBox="0 0 56 56" aria-hidden="true"><path d="M10 46C4 32 14 12 30 7c8-2.5 16-1 19 3-3 3-4 8-3 14 2 12-8 26-20 30-8 2.7-13.5 0-16-8z" fill="var(--pea)" stroke="var(--edge)" stroke-width="3" stroke-linejoin="round"/><circle cx="19" cy="37" r="5.2" fill="var(--pollen)" stroke="var(--edge)" stroke-width="2.4"/><circle cx="27" cy="27" r="5.2" fill="var(--pollen)" stroke="var(--edge)" stroke-width="2.4"/><circle cx="35" cy="17" r="5.2" fill="var(--pollen)" stroke="var(--edge)" stroke-width="2.4"/></svg>
+      <h1>유전 용어 <em>13개</em><br>게임으로 뿌리내리기</h1>
+      <p>Ⅴ. 생식과 유전 · 멘델이 밝힌 유전 원리</p>
+    </div>
+
+    <div class="panel stack" style="margin-top:20px">
+      <div>
+        <div class="eyebrow">먼저 반과 닉네임을 적어 주세요</div>
+        <p class="muted" style="margin:4px 0 0; font-size:.86rem">활동을 마치면 결과 이미지에 반과 닉네임이 함께 들어갑니다.</p>
+      </div>
+      <div class="field">
+        <label for="inPlayer">반+닉네임</label>
+        <input id="inPlayer" type="text" maxlength="24" placeholder="예) 3반 완두왕" autocomplete="off">
+      </div>
+      <div class="row" style="justify-content:flex-end">
+        <button class="btn pea" id="btnStart">도전 시작</button>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:16px; background:var(--surface-2)">
+      <div class="eyebrow" style="margin-bottom:9px">오늘 익힐 용어 13개</div>
+      <div class="termstrip" id="termStrip"></div>
+      <div class="row" style="justify-content:center; margin-top:14px">
+        <button class="btn" id="btnGlossaryIntro">용어 뜻 한눈에 보기</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== HUB ========== -->
+  <section id="scHub" hidden>
+    <div class="center" style="margin-bottom:18px">
+      <h2 style="font-size:clamp(1.4rem,5.5vw,2rem); margin:0 0 4px">미니게임 두 판, 도전!</h2>
+      <p class="muted" style="margin:0; font-size:.9rem">두 게임을 모두 마치면 결과 이미지를 저장할 수 있어요.</p>
+      <div class="row" style="justify-content:center; margin-top:14px">
+        <button class="btn" id="btnGlossaryHub">유전 용어 노트 열기</button>
+      </div>
+    </div>
+
+    <div class="hub">
+      <button class="gamecard" id="cardMatch">
+        <span class="num">MINI GAME 1</span>
+        <h3>완두 짝 맞추기</h3>
+        <p>카드를 뒤집어 <b>용어</b>와 <b>뜻</b>의 짝을 찾습니다. 3라운드, 13개 용어 전부 등장!</p>
+        <span class="state"><i class="dot" id="dotMatch"></i><span id="stMatch">아직 안 했어요</span></span>
+      </button>
+
+      <button class="gamecard" id="cardQuiz">
+        <span class="num">MINI GAME 2</span>
+        <h3>용어 골든벨</h3>
+        <p>제한 시간 안에 OX와 4지선다 <b><span id="qCountLabel">24</span>문제</b>를 풉니다. 빠르게 맞힐수록 점수가 올라가요.</p>
+        <span class="state"><i class="dot" id="dotQuiz"></i><span id="stQuiz">아직 안 했어요</span></span>
+      </button>
+    </div>
+
+    <div class="row" style="justify-content:center; margin-top:22px">
+      <button class="btn blossom" id="btnResult" disabled>결과 보기</button>
+    </div>
+    <p class="center muted" id="hubHint" style="font-size:.84rem; margin-top:10px">두 게임을 모두 끝내면 열립니다.</p>
+  </section>
+
+  <!-- ========== MATCH ========== -->
+  <section id="scMatch" hidden>
+    <div class="roundbar">
+      <div class="pip" id="pip0">1</div>
+      <div class="pip" id="pip1">2</div>
+      <div class="pip" id="pip2">3</div>
+      <div style="margin-left:4px">
+        <div class="eyebrow" id="roundEyebrow">ROUND 1</div>
+        <strong class="display" id="roundTitle" style="font-size:1.15rem"></strong>
+      </div>
+      <span class="chip blossom" style="margin-left:auto">뒤집기 <b id="flipCount">0</b></span>
+      <button class="btn ghost" id="btnMatchQuit" style="font-size:.8rem; padding:6px 13px">나가기</button>
+    </div>
+
+    <div class="previewbar" id="previewBar" hidden>
+      <div class="ptext">
+        <span class="eyebrow">기억하기</span>
+        <strong>카드의 내용과 위치를 외워 보세요!</strong>
+      </div>
+      <span class="chip blossom">남은 시간 <b id="prevCount">10</b>초</span>
+      <button class="btn ghost" id="btnPrevSkip" style="font-size:.8rem; padding:6px 13px">바로 시작</button>
+      <div class="timer"><i id="prevFill"></i></div>
+    </div>
+
+    <div class="board" id="board"></div>
+  </section>
+
+  <!-- ========== QUIZ ========== -->
+  <section id="scQuiz" hidden>
+    <div class="qhead">
+      <span class="chip pea">문제 <b id="qNum">1</b> / <b id="qTotal">18</b></span>
+      <span class="chip pollen">점수 <b id="qScore">0</b></span>
+      <span class="combo" id="qCombo"></span>
+      <button class="btn ghost" id="btnQuizQuit" style="margin-left:auto; font-size:.8rem; padding:6px 13px">나가기</button>
+    </div>
+    <div class="timer" id="timer"><i id="timerFill"></i></div>
+    <div class="panel">
+      <div class="eyebrow" id="qType">OX 문제</div>
+      <p class="qtext" id="qText"></p>
+      <div class="opts" id="qOpts"></div>
+      <div class="feedback" id="qFeedback" hidden></div>
+    </div>
+  </section>
+
+  <!-- ========== RESULT ========== -->
+  <section id="scResult" hidden>
+    <div class="center" style="margin-bottom:18px">
+      <span class="rank" id="rankBadge">새싹 연구원</span>
+      <h2 style="font-size:clamp(1.4rem,5.5vw,2rem); margin:12px 0 2px">용어 마스터 완료!</h2>
+      <p class="muted" id="resWho" style="margin:0; font-size:.9rem"></p>
+    </div>
+
+    <div class="scoreboard">
+      <div class="scorebox big"><span class="v" id="resTotal">0</span><span class="k">총점 (두 게임 최고 기록 평균)</span></div>
+      <div class="scorebox"><span class="v" id="resMatch">0</span><span class="k">완두 짝 맞추기 최고</span></div>
+      <div class="scorebox"><span class="v" id="resQuiz">0</span><span class="k">용어 골든벨 최고</span></div>
+      <div class="scorebox"><span class="v" id="resCombo">0</span><span class="k">최대 연속 정답</span></div>
+    </div>
+
+    <div class="panel" style="margin-top:18px">
+      <div class="eyebrow" style="margin-bottom:12px">도전 기록</div>
+      <div class="histwrap">
+        <div>
+          <h4>완두 짝 맞추기</h4>
+          <div class="histlist" id="histMatch"></div>
+        </div>
+        <div>
+          <h4>용어 골든벨</h4>
+          <div class="histlist" id="histQuiz"></div>
+        </div>
+      </div>
+      <div class="row" style="justify-content:center; margin-top:16px">
+        <button class="btn ghost" id="btnRetryMatch" style="font-size:.88rem; padding:9px 16px">짝 맞추기 다시 도전</button>
+        <button class="btn ghost" id="btnRetryQuiz" style="font-size:.88rem; padding:9px 16px">골든벨 다시 도전</button>
+      </div>
+      <p class="center muted" style="font-size:.82rem; margin:10px 0 0">다시 도전하면 문제 순서와 내용이 바뀌고, 기록은 아래에 계속 쌓입니다.</p>
+    </div>
+
+    <div class="panel" style="margin-top:16px">
+      <div class="eyebrow" style="margin-bottom:10px">오늘 익힌 유전 용어</div>
+      <div class="termstrip" id="resTerms"></div>
+    </div>
+
+    <div id="resWrongWrap" class="panel" style="margin-top:16px" hidden>
+      <div class="eyebrow">가장 최근 도전에서 틀린 문제</div>
+      <div class="wronglist" id="resWrong"></div>
+    </div>
+
+    <div class="row" style="justify-content:center; margin-top:22px">
+      <button class="btn pea" id="btnSave">결과 이미지 저장</button>
+      <button class="btn ghost" id="btnBackHub">게임 화면으로</button>
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ======================================================
+     용어 데이터 — 유전의 기초·우열의 원리 + 표현형·유전자형
+     ====================================================== */
+  /* d = 전체 뜻(복습용), s = 카드에 싣는 짧은 뜻 */
+  const TERMS = {
+    hyeongjil:   {t:"형질",     s:"생물이 지니고 있는 여러 가지 특성",
+                               d:"생물이 지니고 있는 여러 가지 특성"},
+    yujeon:      {t:"유전",     s:"부모의 형질이 자녀에게 전달되는 현상",
+                               d:"부모의 형질이 자녀에게 전달되는 현상"},
+    sangdong:    {t:"상동염색체", s:"쌍을 이루며, 한 쌍이 함께 한 가지 형질을 결정하는 염색체",
+                               d:"항상 쌍을 이루며, 한 쌍이 함께 한 가지 형질을 결정하는 염색체"},
+    daeripYuj:   {t:"대립유전자", s:"대립 형질을 결정하는 유전자",
+                               d:"대립 형질을 결정하는 유전자. 상동 염색체의 같은 위치에 하나씩 들어 있다"},
+    daeripHyeong:{t:"대립형질",  s:"한 가지 형질에서 뚜렷하게 구분되는 특징",
+                               d:"한 가지 형질에서 뚜렷하게 구분되는 특징 (예: 노란색 완두와 초록색 완두)"},
+    sunjong:     {t:"순종",     s:"유전자의 구성이 같은 개체",
+                               d:"한 가지 형질을 나타내는 유전자의 구성이 같은 개체"},
+    japjong:     {t:"잡종",     s:"유전자의 구성이 다른 개체",
+                               d:"한 가지 형질을 나타내는 유전자의 구성이 다른 개체"},
+    pyohyeon:    {t:"표현형",   s:"겉으로 드러나는 형질을 한글로 나타낸 것",
+                               d:"겉으로 드러나는 형질을 한글로 나타낸 것 (예: 노란색 완두, 쌍꺼풀이 있다)"},
+    yujeonja:    {t:"유전자형", s:"유전자 구성을 알파벳 기호로 나타낸 것",
+                               d:"유전자 구성을 알파벳 기호로 나타낸 것. 우성은 대문자, 열성은 소문자 (예: YY, Yy, yy)"},
+    jaga:        {t:"자가수분", s:"한 그루 안에서 꽃가루가 암술머리에 붙는 것",
+                               d:"한 그루 안에서 꽃가루가 암술머리에 붙는 것"},
+    taga:        {t:"타가수분", s:"서로 다른 그루 사이에서 꽃가루가 붙는 것",
+                               d:"서로 다른 그루 사이에서 꽃가루가 암술머리에 붙는 것"},
+    useong:      {t:"우성",     s:"순종끼리 교배했을 때 자손 1대에 나타나는 형질",
+                               d:"서로 다른 대립 형질의 순종끼리 교배했을 때 자손 1대에서 나타나는 형질"},
+    yeolseong:   {t:"열성",     s:"순종끼리 교배했을 때 자손 1대에 나타나지 않는 형질",
+                               d:"서로 다른 대립 형질의 순종끼리 교배했을 때 자손 1대에서 나타나지 않는 형질"}
+  };
+  const TERM_ORDER = ["hyeongjil","yujeon","sangdong","daeripYuj","daeripHyeong","sunjong","japjong","pyohyeon","yujeonja","jaga","taga","useong","yeolseong"];
+
+  const ROUNDS = [
+    {title:"유전의 출발",       keys:["hyeongjil","yujeon","sangdong","daeripYuj"]},
+    {title:"형질과 유전자 구성", keys:["daeripHyeong","sunjong","japjong","pyohyeon","yujeonja"]},
+    {title:"수분과 우열의 원리", keys:["jaga","taga","useong","yeolseong"]}
+  ];
+
+  /* ======================================================
+     골든벨 문항 — 유전 기본 용어 + 표현형·유전자형 확인 문제 (21문항)
+     ====================================================== */
+  /* 주제(그룹)마다 유사 문제 2개 — 도전할 때마다 그룹에서 하나씩 무작위로 뽑고 순서도 섞는다 */
+  const QUESTION_GROUPS = [
+    [ {type:"ox", q:"순종은 한 가지 형질을 나타내는 유전자의 구성이 같은 개체이다.", a:true,
+       why:"순종은 유전자 구성이 같은 개체, 잡종은 유전자 구성이 다른 개체입니다."},
+      {type:"ox", q:"순종은 한 가지 형질을 나타내는 유전자의 구성이 서로 다른 개체이다.", a:false,
+       why:"유전자 구성이 같으면 순종, 다르면 잡종입니다."} ],
+
+    [ {type:"ox", q:"자가수분은 서로 다른 그루 사이에서 꽃가루가 옮겨 가는 것이다.", a:false,
+       why:"서로 다른 그루 사이는 타가수분입니다. 자가수분은 한 그루 안에서 일어납니다."},
+      {type:"ox", q:"타가수분은 서로 다른 그루 사이에서 꽃가루가 암술머리에 붙는 것이다.", a:true,
+       why:"한 그루 안에서 일어나면 자가수분, 다른 그루 사이에서 일어나면 타가수분입니다."} ],
+
+    [ {type:"ox", q:"열성은 순종의 대립 형질끼리 교배했을 때 자손 1대에서 나타나지 않는 형질이다.", a:true,
+       why:"자손 1대에서 나타나는 형질이 우성, 나타나지 않는 형질이 열성입니다."},
+      {type:"ox", q:"우성은 순종의 대립 형질끼리 교배했을 때 자손 1대에서 나타나지 않는 형질이다.", a:false,
+       why:"자손 1대에 나타나는 형질이 우성입니다. 나타나지 않는 형질이 열성입니다."} ],
+
+    [ {type:"ox", q:"대립유전자는 서로 다른 염색체의 각각 다른 위치에 들어 있다.", a:false,
+       why:"대립유전자는 한 쌍의 상동 염색체의 '같은 위치'에 각각 하나씩 들어 있습니다."},
+      {type:"ox", q:"대립유전자는 한 쌍의 상동 염색체의 같은 위치에 하나씩 들어 있다.", a:true,
+       why:"그래서 정자에서 1개, 난자에서 1개를 물려받아 다시 쌍을 이룹니다."} ],
+
+    [ {type:"ox", q:"19세기 사람들은 부모의 형질이 물감처럼 섞여 자손에게 전달된다고 생각했다.", a:true,
+       why:"멘델은 이 생각에 의문을 품고 완두로 유전 연구를 시작했습니다."},
+      {type:"ox", q:"멘델은 부모의 형질이 물감처럼 섞여서 자손에게 전달된다는 것을 실험으로 밝혔다.", a:false,
+       why:"물감처럼 섞인다는 것은 19세기 사람들의 생각이었고, 멘델은 여기에 의문을 품고 완두로 연구했습니다."} ],
+
+    [ {type:"ox", q:"잡종은 한 가지 형질을 나타내는 유전자의 구성이 다른 개체이다.", a:true,
+       why:"유전자 구성이 다르면 잡종, 같으면 순종입니다."},
+      {type:"ox", q:"잡종은 유전자의 구성이 같은 개체를 말한다.", a:false,
+       why:"구성이 같은 개체는 순종입니다. 잡종은 구성이 서로 다른 개체입니다."} ],
+
+    [ {type:"ox", q:"한 쌍의 상동 염색체는 서로 다른 두 가지 형질을 각각 결정한다.", a:false,
+       why:"한 쌍의 상동 염색체가 '함께' 한 가지 형질을 결정합니다."},
+      {type:"ox", q:"한 쌍의 상동 염색체가 함께 한 가지 형질을 결정한다.", a:true,
+       why:"예를 들어 쌍꺼풀 유무를 결정하는 대립유전자는 한 쌍의 상동 염색체에 각각 들어 있습니다."} ],
+
+    [ {type:"ox", q:"멘델은 완두 대신 사람을 실험 재료로 사용하였다.", a:false,
+       why:"멘델은 완두를 사용했습니다. 완두는 기르기 쉽고 한 세대가 짧으며 대립 형질이 뚜렷합니다."},
+      {type:"ox", q:"멘델이 완두를 실험 재료로 고른 까닭 중 하나는 한 세대가 짧기 때문이다.", a:true,
+       why:"완두는 기르기 쉽고, 한 세대가 짧으며, 자손의 수가 많고, 대립 형질이 뚜렷합니다."} ],
+
+    [ {type:"ox", q:"유전자형은 유전자 구성을 알파벳 기호로 나타낸 것이다.", a:true,
+       why:"유전자형은 YY, Yy, yy처럼 알파벳으로 나타냅니다."},
+      {type:"ox", q:"유전자형은 겉으로 드러나는 형질을 한글로 나타낸 것이다.", a:false,
+       why:"한글로 나타내는 것은 표현형입니다. 유전자형은 알파벳 기호로 나타냅니다."} ],
+
+    [ {type:"ox", q:"표현형은 우성 유전자를 대문자로 나타낸 것이다.", a:false,
+       why:"대문자·소문자로 나타내는 것은 유전자형입니다. 표현형은 겉으로 드러나는 형질을 한글로 나타낸 것입니다."},
+      {type:"ox", q:"'완두가 노란색이다'는 표현형을 나타낸 것이다.", a:true,
+       why:"겉으로 드러나는 형질을 한글로 나타낸 것이 표현형입니다."} ],
+
+    [ {type:"mc", q:"'생물이 지니고 있는 여러 가지 특성'을 뜻하는 용어는?",
+       a:"형질", o:["유전","순종","우성"],
+       why:"형질은 생물이 지니고 있는 여러 가지 특성을 말합니다."},
+      {type:"mc", q:"완두의 씨 색깔, 꽃의 색, 줄기 길이처럼 생물이 지닌 여러 가지 특성을 무엇이라고 하는가?",
+       a:"형질", o:["유전","대립유전자","표현형"],
+       why:"이러한 특성 하나하나가 형질입니다."} ],
+
+    [ {type:"mc", q:"쌍꺼풀과 외꺼풀, 노란색 완두와 초록색 완두처럼 한 가지 형질에서 뚜렷하게 구분되는 특징은?",
+       a:"대립형질", o:["대립유전자","상동염색체","잡종"],
+       why:"대립형질은 한 가지 형질에서 서로 대립 관계에 있는 특징입니다. 이를 결정하는 유전자가 대립유전자입니다."},
+      {type:"mc", q:"둥근 완두와 주름진 완두는 서로 어떤 관계인가?",
+       a:"대립형질", o:["대립유전자","순종과 잡종","자가수분과 타가수분"],
+       why:"씨 모양이라는 한 가지 형질에서 뚜렷하게 구분되므로 서로 대립형질입니다."} ],
+
+    [ {type:"mc", q:"완두가 유전 실험 재료로 알맞은 까닭이 아닌 것은?",
+       a:"한 세대가 길다", o:["기르기 쉽다","자손의 수가 많다","대립 형질이 뚜렷하다"],
+       why:"완두는 한 세대가 '짧아서' 실험 결과를 빨리 확인할 수 있습니다."},
+      {type:"mc", q:"완두가 유전 실험 재료로 알맞은 까닭으로 옳은 것은?",
+       a:"대립 형질이 뚜렷하다", o:["자손의 수가 적다","한 세대가 길다","기르기 어렵다"],
+       why:"완두는 기르기 쉽고, 한 세대가 짧으며, 자손의 수가 많고, 대립 형질이 뚜렷합니다."} ],
+
+    [ {type:"mc", q:"노란색 순종 완두와 초록색 순종 완두를 교배했더니 자손 1대가 모두 노란색이었다. 이때 노란색은?",
+       a:"우성", o:["열성","잡종","순종"],
+       why:"자손 1대에서 나타난 형질이 우성, 나타나지 않은 형질(초록색)이 열성입니다."},
+      {type:"mc", q:"둥근 완두(순종)와 주름진 완두(순종)를 교배했더니 자손 1대가 모두 둥근 완두였다. 이때 주름진 형질은?",
+       a:"열성", o:["우성","순종","잡종"],
+       why:"자손 1대에 나타나지 않은 주름진 형질이 열성, 나타난 둥근 형질이 우성입니다."} ],
+
+    [ {type:"mc", q:"부모의 형질이 자녀에게 전달되는 현상을 무엇이라고 하는가?",
+       a:"유전", o:["형질","생식","대립형질"],
+       why:"부모의 형질이 자녀에게 전달되는 현상이 유전입니다."},
+      {type:"mc", q:"아버지의 보조개가 자녀에게도 나타나는 것처럼, 부모의 형질이 자녀에게 전달되는 현상은?",
+       a:"유전", o:["형질","수분","표현형"],
+       why:"부모의 형질이 자녀에게 전달되는 현상을 유전이라고 합니다."} ],
+
+    [ {type:"mc", q:"수정란은 정자에서 1개, 난자에서 1개씩 대립유전자를 물려받는다. 이 대립유전자가 각각 들어 있는 한 쌍의 염색체는?",
+       a:"상동염색체", o:["대립형질","생식세포","순종"],
+       why:"상동 염색체는 항상 쌍을 이루며, 그 같은 위치에 대립유전자가 하나씩 들어 있습니다."},
+      {type:"mc", q:"항상 쌍을 이루고 있으며, 한 쌍이 함께 한 가지 형질을 결정하는 염색체는?",
+       a:"상동염색체", o:["대립유전자","생식세포","유전자형"],
+       why:"한 쌍의 상동 염색체가 함께 한 가지 형질을 결정합니다."} ],
+
+    [ {type:"mc", q:"완두가 '노란색', '초록색'인 것처럼 겉으로 드러나는 형질을 한글로 나타낸 것은?",
+       a:"표현형", o:["유전자형","대립유전자","순종"],
+       why:"겉으로 드러나는 형질은 표현형, 그 유전자 구성을 알파벳으로 나타낸 것은 유전자형입니다."},
+      {type:"mc", q:"'쌍꺼풀이 있다', '보조개가 없다'처럼 겉으로 드러나는 형질을 나타낸 것은?",
+       a:"표현형", o:["유전자형","상동염색체","대립유전자"],
+       why:"표현형은 겉으로 드러나는 형질을 한글로 표현한 것입니다."} ],
+
+    [ {type:"mc", q:"유전자형을 알파벳으로 나타낼 때, 우성 유전자와 열성 유전자는 각각 어떻게 표시하는가?",
+       a:"우성은 대문자, 열성은 소문자", o:["우성은 소문자, 열성은 대문자","우성과 열성 모두 대문자","우성과 열성 모두 소문자"],
+       why:"보통 우성 형질을 뜻하는 영단어의 첫 알파벳을 써서, 우성은 대문자(Y) 열성은 소문자(y)로 나타냅니다."},
+      {type:"mc", q:"노란색(우성)을 Y로 나타낼 때, 초록색(열성) 완두의 유전자형으로 알맞은 것은?",
+       a:"yy", o:["YY","Yy","YY와 Yy 모두"],
+       why:"열성 형질은 열성 유전자만 가질 때 나타나므로 초록색 완두의 유전자형은 yy입니다."} ],
+
+    /* ── 여기부터 교과서 확인 문제에서 가져온 문항 ── */
+
+    [ {type:"mc", q:"다음 유전자형 중 순종인 것은?",
+       a:"RR", o:["Yy","Rr","RrYY"],
+       why:"한 형질을 나타내는 대립유전자의 구성이 같으면 순종(YY, rr, RRYY), 다르면 잡종(Yy, Rr, RrYY)입니다."},
+      {type:"mc", q:"다음 유전자형 중 잡종인 것은?",
+       a:"Yy", o:["YY","yy","RRYY"],
+       why:"Yy는 대립유전자의 구성이 서로 달라 잡종입니다. YY·yy·RRYY는 구성이 같아 순종입니다."} ],
+
+    [ {type:"mc", q:"노란색 순종 완두(YY)와 초록색 순종 완두(yy)를 교배해 얻은 자손 1대의 유전자형은?",
+       a:"Yy", o:["YY","yy","Y"],
+       why:"어버이에게서 Y와 y를 하나씩 물려받으므로 자손 1대의 유전자형은 모두 Yy입니다."},
+      {type:"mc", q:"노란색 순종 완두(YY)와 초록색 순종 완두(yy)를 교배해 얻은 자손 1대의 표현형은?",
+       a:"노란색 완두", o:["초록색 완두","노란색과 초록색이 반반","연두색 완두"],
+       why:"자손 1대의 유전자형은 Yy이고, 우성인 노란색만 겉으로 나타납니다."} ],
+
+    [ {type:"ox", q:"멘델은 노란색 완두를 심고 자가수분을 여러 번 반복하는 방법으로 노란색에 대한 순종을 얻었다.", a:true,
+       why:"한 그루 안에서 수분이 일어나게 해, 자손이 모두 노란색으로 나오면 순종으로 판단했습니다."},
+      {type:"mc", q:"멘델이 노란색 완두에 대한 순종을 얻기 위해 여러 번 반복한 방법은?",
+       a:"자가수분", o:["타가수분","다른 품종과 교배","감수 분열 관찰"],
+       why:"한 그루 안에서 수분이 일어나게 하는 자가수분을 반복해 순종을 얻었습니다."} ]
+  ];
+  const QCOUNT = QUESTION_GROUPS.length;
+
+  /* 그룹마다 유사 문제 하나씩 뽑아 순서를 섞는다 */
+  function pickQuestions(){
+    const picked = QUESTION_GROUPS.map(function(g){
+      return g[Math.floor(Math.random() * g.length)];
+    });
+    return shuffle(picked);
+  }
+
+  const OX_SEC = 10, MC_SEC = 15;
+
+  /* ====================== 상태 ====================== */
+  /* score / correct / maxCombo = 최고 기록, history = 도전할 때마다 쌓이는 기록 */
+  const state = {
+    player:"",
+    match:{done:false, rounds:[], score:0, history:[]},
+    quiz:{done:false, score:0, correct:0, maxCombo:0, wrong:[], history:[]}
+  };
+
+  const $ = function(id){ return document.getElementById(id); };
+  function shuffle(arr){
+    const a = arr.slice();
+    for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); const t=a[i]; a[i]=a[j]; a[j]=t; }
+    return a;
+  }
+  let toastTimer = null;
+  function toast(msg){
+    const old = document.querySelector(".toast");
+    if(old) old.remove();
+    const el = document.createElement("div");
+    el.className = "toast"; el.textContent = msg;
+    document.body.appendChild(el);
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ el.remove(); }, 2200);
+  }
+  const POD_SVG = '<svg class="pod" viewBox="0 0 56 56" aria-hidden="true"><path d="M10 46C4 32 14 12 30 7c8-2.5 16-1 19 3-3 3-4 8-3 14 2 12-8 26-20 30-8 2.7-13.5 0-16-8z" fill="var(--pea)" stroke="var(--edge)" stroke-width="3" stroke-linejoin="round"/><circle cx="19" cy="37" r="5.2" fill="var(--pollen)" stroke="var(--edge)" stroke-width="2.4"/><circle cx="27" cy="27" r="5.2" fill="var(--pollen)" stroke="var(--edge)" stroke-width="2.4"/><circle cx="35" cy="17" r="5.2" fill="var(--pollen)" stroke="var(--edge)" stroke-width="2.4"/></svg>';
+
+  const SCREENS = ["scIntro","scHub","scMatch","scQuiz","scResult"];
+  function show(id){
+    SCREENS.forEach(function(s){ $(s).hidden = (s !== id); });
+    window.scrollTo({top:0, behavior:"auto"});
+  }
+
+  /* ====================== 용어 칩 ====================== */
+  function fillTermStrip(el){
+    el.innerHTML = "";
+    TERM_ORDER.forEach(function(k){
+      const s = document.createElement("span");
+      s.className = "term-chip"; s.textContent = TERMS[k].t;
+      el.appendChild(s);
+    });
+  }
+  fillTermStrip($("termStrip"));
+  $("qCountLabel").textContent = String(QCOUNT);
+
+  /* ====================== 용어 노트 (게임 전 뜻 한눈에 보기) ====================== */
+  function openGlossary(){
+    const groups = ROUNDS.map(function(r){
+      const items = r.keys.map(function(k){
+        return '<div class="glossitem"><div class="gt">' + TERMS[k].t + '</div>' +
+               '<div class="gd">' + TERMS[k].d + '</div></div>';
+      }).join("");
+      return '<div class="glossgroup"><span class="eyebrow">' + r.title + '</span>' + items + '</div>';
+    }).join("");
+
+    const wrap = document.createElement("div");
+    wrap.className = "modal";
+    wrap.innerHTML =
+      '<div class="panel stack">' +
+        '<div>' +
+          '<div class="eyebrow">유전 용어 노트</div>' +
+          '<h3 style="margin:2px 0 4px; font-size:1.35rem">13개 용어의 뜻</h3>' +
+          '<p class="muted" style="margin:0; font-size:.84rem">게임 중에는 볼 수 없어요. 시작하기 전에 천천히 읽어 보세요.</p>' +
+        '</div>' +
+        groups +
+        '<div class="row" style="justify-content:center"><button class="btn pea" id="glClose">다 외웠어요</button></div>' +
+      '</div>';
+    document.body.appendChild(wrap);
+    const close = wrap.querySelector("#glClose");
+    close.focus();
+    close.addEventListener("click", function(){ wrap.remove(); });
+    wrap.addEventListener("click", function(e){ if(e.target === wrap) wrap.remove(); });
+  }
+  $("btnGlossaryIntro").addEventListener("click", openGlossary);
+  $("btnGlossaryHub").addEventListener("click", openGlossary);
+
+  /* ====================== 인트로 ====================== */
+  $("btnStart").addEventListener("click", function(){
+    const tag = $("inPlayer").value.trim();
+    if(!tag){ toast("반과 닉네임을 입력해 주세요."); $("inPlayer").focus(); return; }
+    state.player = tag;
+    $("chipPlayer").hidden = false;
+    $("chipPlayer").textContent = tag;
+    $("chipScore").hidden = false;
+    updateHub();
+    show("scHub");
+  });
+  $("inPlayer").addEventListener("keydown", function(e){ if(e.key === "Enter") $("btnStart").click(); });
+
+  /* ====================== 허브 ====================== */
+  function updateHub(){
+    $("dotMatch").classList.toggle("on", state.match.done);
+    $("dotQuiz").classList.toggle("on", state.quiz.done);
+    $("stMatch").textContent = state.match.done
+      ? ("최고 " + state.match.score + "점 · " + state.match.history.length + "번 도전 — 다시 도전할 수 있어요")
+      : "아직 안 했어요";
+    $("stQuiz").textContent  = state.quiz.done
+      ? ("최고 " + state.quiz.score + "점 · " + state.quiz.history.length + "번 도전 — 다시 도전할 수 있어요")
+      : "아직 안 했어요";
+    const both = state.match.done && state.quiz.done;
+    $("btnResult").disabled = !both;
+    $("hubHint").textContent = both ? "결과 이미지를 저장할 수 있어요." : "두 게임을 모두 끝내면 열립니다.";
+    $("chipScore").innerHTML = "총점 <b>" + totalScore() + "</b>";
+  }
+  function totalScore(){
+    return Math.round((state.match.score + state.quiz.score) / 2);
+  }
+  $("cardMatch").addEventListener("click", startMatch);
+  $("cardQuiz").addEventListener("click", startQuiz);
+  $("btnResult").addEventListener("click", showResult);
+  $("btnBackHub").addEventListener("click", function(){ updateHub(); show("scHub"); });
+
+  /* ====================================================
+     MINI GAME 1 — 완두 짝 맞추기
+     ==================================================== */
+  const m = {round:0, first:null, lock:false, flips:0, misses:0, matched:0, pairs:0,
+             previewing:false, tick:null, previewTimer:null};
+
+  function startMatch(){
+    m.round = 0;
+    m.log = [];
+    show("scMatch");
+    buildRound();
+  }
+  function clearMatchTimers(){
+    clearInterval(m.tick); clearTimeout(m.previewTimer);
+    m.previewing = false;
+    $("previewBar").hidden = true;
+  }
+  $("btnMatchQuit").addEventListener("click", function(){
+    clearMatchTimers();
+    updateHub(); show("scHub");
+  });
+  $("btnPrevSkip").addEventListener("click", endPreview);
+
+  function buildRound(){
+    const r = ROUNDS[m.round];
+    m.first = null; m.lock = false; m.flips = 0; m.misses = 0; m.matched = 0;
+    m.pairs = r.keys.length;
+
+    for(let i=0;i<3;i++){
+      const pip = $("pip"+i);
+      pip.classList.toggle("now", i === m.round);
+      pip.classList.toggle("done", i < m.round);
+    }
+    $("roundEyebrow").textContent = "ROUND " + (m.round+1) + " / 3";
+    $("roundTitle").textContent = r.title;
+    $("flipCount").textContent = "0";
+
+    const cards = [];
+    r.keys.forEach(function(k){
+      cards.push({key:k, kind:"term"});
+      cards.push({key:k, kind:"def"});
+    });
+    const deck = shuffle(cards);
+
+    const board = $("board");
+    board.className = "board" + (m.pairs === 5 ? " cols5" : "");
+    board.innerHTML = "";
+    deck.forEach(function(c, idx){
+      const btn = document.createElement("button");
+      btn.className = "card";
+      btn.dataset.key = c.key;
+      btn.dataset.idx = String(idx);
+      btn.setAttribute("aria-label", "카드 " + (idx+1) + ", 뒤집으려면 누르세요");
+      const front = c.kind === "term"
+        ? '<div class="face front term"><span class="kind">용어</span><span class="word">' + TERMS[c.key].t + '</span></div>'
+        : '<div class="face front def"><span class="kind">뜻</span><span class="defn">' + TERMS[c.key].s + '</span></div>';
+      btn.innerHTML = '<div class="card-inner"><div class="face back">' + POD_SVG + '</div>' + front + '</div>';
+      btn.addEventListener("click", function(){ onCard(btn); });
+      board.appendChild(btn);
+    });
+
+    startPreview();
+  }
+
+  /* 라운드 시작 전 — 카드를 모두 뒤집어 내용과 위치를 먼저 확인하는 시간
+     (카드 수에 비례: 8장 10초, 10장 12초) */
+  function startPreview(){
+    const cardCount = m.pairs * 2;
+    const sec = 2 + cardCount;
+    m.previewing = true;
+    m.lock = true;
+
+    $("board").querySelectorAll(".card").forEach(function(c){ c.classList.add("flipped"); });
+
+    $("previewBar").hidden = false;
+    $("prevCount").textContent = String(sec);
+    const fill = $("prevFill");
+    fill.style.transition = "none";
+    fill.style.width = "100%";
+    void fill.offsetWidth;
+    fill.style.transition = "width " + sec + "s linear";
+    fill.style.width = "0%";
+
+    let left = sec;
+    clearInterval(m.tick);
+    m.tick = setInterval(function(){
+      left--;
+      $("prevCount").textContent = String(Math.max(0, left));
+      if(left <= 0) endPreview();
+    }, 1000);
+
+    clearTimeout(m.previewTimer);
+    m.previewTimer = setTimeout(endPreview, sec * 1000);
+  }
+
+  function endPreview(){
+    if(!m.previewing) return;
+    m.previewing = false;
+    clearInterval(m.tick);
+    clearTimeout(m.previewTimer);
+    $("previewBar").hidden = true;
+    $("board").querySelectorAll(".card").forEach(function(c){ c.classList.remove("flipped"); });
+    toast("이제 짝을 찾아보세요!");
+    setTimeout(function(){ m.lock = false; }, 460);
+  }
+
+  function onCard(btn){
+    if(m.lock) return;
+    if(btn.classList.contains("matched") || btn.classList.contains("flipped")) return;
+
+    btn.classList.add("flipped");
+    m.flips++;
+    $("flipCount").textContent = String(m.flips);
+
+    if(!m.first){ m.first = btn; return; }
+
+    const a = m.first, b = btn;
+    m.first = null;
+    m.lock = true;
+
+    if(a.dataset.key === b.dataset.key){
+      setTimeout(function(){
+        a.classList.add("matched"); b.classList.add("matched");
+        a.disabled = true; b.disabled = true;
+        m.matched++;
+        m.lock = false;
+        if(m.matched === m.pairs) finishRound();
+      }, 380);
+    }else{
+      m.misses++;
+      setTimeout(function(){
+        a.classList.add("shake"); b.classList.add("shake");
+      }, 380);
+      setTimeout(function(){
+        a.classList.remove("flipped","shake");
+        b.classList.remove("flipped","shake");
+        m.lock = false;
+      }, 950);
+    }
+  }
+
+  function finishRound(){
+    const score = Math.max(40, 100 - m.misses * 8);
+    m.log.push({title:ROUNDS[m.round].title, score:score, misses:m.misses, flips:m.flips});
+    setTimeout(function(){ roundModal(score); }, 500);
+  }
+
+  function roundModal(score){
+    const r = ROUNDS[m.round];
+    const last = (m.round === ROUNDS.length - 1);
+    const list = r.keys.map(function(k){
+      return '<div class="wrongitem" style="border-left-color:var(--pea)"><b>' + TERMS[k].t + '</b> · ' + TERMS[k].d + '</div>';
+    }).join("");
+
+    const wrap = document.createElement("div");
+    wrap.className = "modal";
+    wrap.innerHTML =
+      '<div class="panel stack">' +
+        '<div class="center">' +
+          '<div class="eyebrow">ROUND ' + (m.round+1) + ' 클리어</div>' +
+          '<div class="display" style="font-size:2.6rem; color:var(--pea); line-height:1.2">' + score + '점</div>' +
+          '<p class="muted" style="margin:0; font-size:.85rem">뒤집기 ' + m.flips + '회 · 실패 ' + m.misses + '회</p>' +
+        '</div>' +
+        '<div><div class="eyebrow" style="margin-bottom:8px">이 라운드에서 만난 용어</div>' +
+        '<div class="wronglist">' + list + '</div></div>' +
+        '<div class="row" style="justify-content:center">' +
+          '<button class="btn pea" id="mNext">' + (last ? "게임 1 마치기" : "다음 라운드") + '</button>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(wrap);
+    wrap.querySelector("#mNext").focus();
+    wrap.querySelector("#mNext").addEventListener("click", function(){
+      wrap.remove();
+      if(last){
+        let sum = 0;
+        m.log.forEach(function(x){ sum += x.score; });
+        const avg = Math.round(sum / m.log.length);
+        const n = state.match.history.length + 1;
+        state.match.history.push({n:n, score:avg});
+        const isBest = !state.match.done || avg > state.match.score;
+        if(isBest){ state.match.score = avg; state.match.rounds = m.log.slice(); }
+        state.match.done = true;
+        updateHub();
+        show("scHub");
+        if(n === 1) toast("완두 짝 맞추기 완료! " + avg + "점");
+        else if(isBest) toast(n + "차 도전 " + avg + "점 — 최고 기록 경신!");
+        else toast(n + "차 도전 " + avg + "점 · 최고 기록 " + state.match.score + "점");
+      }else{
+        m.round++;
+        buildRound();
+      }
+    });
+  }
+
+  /* ====================================================
+     MINI GAME 2 — 용어 골든벨
+     ==================================================== */
+  const q = {list:[], i:0, score:0, combo:0, maxCombo:0, correct:0, wrong:[], deadline:0, timer:null, answered:false};
+
+  function startQuiz(){
+    q.list = pickQuestions();
+    q.i = 0; q.score = 0; q.combo = 0; q.maxCombo = 0; q.correct = 0; q.wrong = [];
+    $("qTotal").textContent = String(QCOUNT);
+    show("scQuiz");
+    renderQuestion();
+  }
+  $("btnQuizQuit").addEventListener("click", function(){
+    clearTimeout(q.timer);
+    updateHub(); show("scHub");
+  });
+
+  function renderQuestion(){
+    const item = q.list[q.i];
+    q.answered = false;
+    $("qNum").textContent = String(q.i + 1);
+    $("qScore").textContent = String(q.score);
+    $("qCombo").textContent = q.combo >= 3 ? (q.combo + "연속!") : "";
+    $("qType").textContent = item.type === "ox" ? "OX 문제" : "4지선다 문제";
+    $("qText").textContent = item.q;
+    $("qFeedback").hidden = true;
+
+    const opts = $("qOpts");
+    opts.innerHTML = "";
+    opts.className = "opts" + (item.type === "ox" ? " ox" : "");
+
+    if(item.type === "ox"){
+      [[true,"O","맞다"],[false,"X","아니다"]].forEach(function(pair){
+        const b = document.createElement("button");
+        b.className = "opt";
+        b.innerHTML = pair[1] + '<small>' + pair[2] + '</small>';
+        b.addEventListener("click", function(){ answer(b, pair[0] === item.a); });
+        opts.appendChild(b);
+      });
+    }else{
+      const choices = shuffle([item.a].concat(item.o));
+      const labels = ["①","②","③","④"];
+      choices.forEach(function(c, idx){
+        const b = document.createElement("button");
+        b.className = "opt";
+        b.innerHTML = '<span class="badge">' + labels[idx] + '</span><span>' + c + '</span>';
+        b.addEventListener("click", function(){ answer(b, c === item.a); });
+        opts.appendChild(b);
+      });
+    }
+
+    const sec = item.type === "ox" ? OX_SEC : MC_SEC;
+    q.deadline = Date.now() + sec * 1000;
+    const fill = $("timerFill");
+    $("timer").classList.remove("warn");
+    fill.style.transition = "none";
+    fill.style.width = "100%";
+    // force reflow so the reset width applies before the countdown transition
+    void fill.offsetWidth;
+    fill.style.transition = "width " + sec + "s linear";
+    fill.style.width = "0%";
+    clearTimeout(q.timer);
+    q.timer = setTimeout(function(){ if(!q.answered) answer(null, false, true); }, sec * 1000);
+  }
+
+  function answer(btn, ok, timedOut){
+    if(q.answered) return;
+    q.answered = true;
+    clearTimeout(q.timer);
+
+    const item = q.list[q.i];
+    const sec = item.type === "ox" ? OX_SEC : MC_SEC;
+    const leftRatio = Math.max(0, Math.min(1, (q.deadline - Date.now()) / (sec * 1000)));
+
+    // freeze the timer bar where it stopped
+    const fill = $("timerFill");
+    const w = fill.getBoundingClientRect().width;
+    const track = fill.parentElement.getBoundingClientRect().width;
+    fill.style.transition = "none";
+    fill.style.width = (track ? (w / track * 100) : 0) + "%";
+
+    const opts = $("qOpts").querySelectorAll(".opt");
+    opts.forEach(function(o){ o.disabled = true; });
+
+    if(ok){
+      const gained = 60 + Math.round(40 * leftRatio);
+      q.score += gained;
+      q.correct++;
+      q.combo++;
+      if(q.combo > q.maxCombo) q.maxCombo = q.combo;
+      if(btn) btn.classList.add("correct");
+      const fb = $("qFeedback");
+      fb.className = "feedback ok";
+      fb.innerHTML = '<b>정답! +' + gained + '점</b> · ' + item.why;
+      fb.hidden = false;
+    }else{
+      q.combo = 0;
+      q.wrong.push(item);
+      if(btn) btn.classList.add("wrong");
+      // reveal the right answer
+      opts.forEach(function(o){
+        const txt = o.textContent.replace(/^[①②③④]/, "").trim();
+        if(item.type === "ox"){
+          if((item.a && o.textContent.indexOf("O") === 0) || (!item.a && o.textContent.indexOf("X") === 0)) o.classList.add("correct");
+        }else if(txt === item.a){
+          o.classList.add("correct");
+        }
+      });
+      const fb = $("qFeedback");
+      fb.className = "feedback no";
+      const head = timedOut ? "시간 초과!" : "아쉬워요!";
+      const ansText = item.type === "ox" ? (item.a ? "O" : "X") : item.a;
+      fb.innerHTML = '<b>' + head + ' 정답은 ' + ansText + '</b> · ' + item.why;
+      fb.hidden = false;
+    }
+
+    $("qScore").textContent = String(q.score);
+    $("qCombo").textContent = q.combo >= 3 ? (q.combo + "연속!") : "";
+    $("timer").classList.toggle("warn", !ok);
+
+    setTimeout(function(){
+      q.i++;
+      if(q.i < q.list.length) renderQuestion();
+      else finishQuiz();
+    }, ok ? 1500 : 2600);
+  }
+
+  function finishQuiz(){
+    const s = Math.round(q.score / QCOUNT);
+    const n = state.quiz.history.length + 1;
+    state.quiz.history.push({n:n, score:s, correct:q.correct, maxCombo:q.maxCombo});
+    state.quiz.wrong = q.wrong.slice();            // 오답 노트는 가장 최근 도전 기준
+    const isBest = !state.quiz.done || s > state.quiz.score;
+    if(isBest){
+      state.quiz.score = s;
+      state.quiz.correct = q.correct;
+      state.quiz.maxCombo = q.maxCombo;
+    }
+    state.quiz.done = true;
+    updateHub();
+    show("scHub");
+    if(n === 1) toast("용어 골든벨 완료! " + s + "점 (" + q.correct + "/" + QCOUNT + " 정답)");
+    else if(isBest) toast(n + "차 도전 " + s + "점 — 최고 기록 경신!");
+    else toast(n + "차 도전 " + s + "점 · 최고 기록 " + state.quiz.score + "점");
+  }
+
+  /* ====================================================
+     결과
+     ==================================================== */
+  function rankOf(score){
+    if(score >= 90) return "유전 박사";
+    if(score >= 75) return "멘델 연구원";
+    if(score >= 60) return "완두 탐험가";
+    return "새싹 연구원";
+  }
+
+  function renderHistory(el, hist, best){
+    el.innerHTML = "";
+    let bestShown = false;
+    hist.forEach(function(h){
+      const row = document.createElement("div");
+      const isBest = (h.score === best) && !bestShown;
+      if(isBest) bestShown = true;
+      row.className = "histrow" + (isBest ? " best" : "");
+      row.innerHTML = '<span>' + h.n + '차 도전</span>'
+        + (isBest ? '<span class="tag">최고</span>' : '')
+        + '<span class="s">' + h.score + '점</span>';
+      el.appendChild(row);
+    });
+  }
+
+  $("btnRetryMatch").addEventListener("click", startMatch);
+  $("btnRetryQuiz").addEventListener("click", startQuiz);
+
+  function showResult(){
+    const total = totalScore();
+    $("resTotal").textContent = String(total);
+    $("resMatch").textContent = String(state.match.score);
+    $("resQuiz").textContent  = String(state.quiz.score);
+    $("resCombo").textContent = String(state.quiz.maxCombo);
+    $("rankBadge").textContent = rankOf(total);
+    $("resWho").textContent = state.player
+      + " · 골든벨 최고 기록 " + state.quiz.correct + " / " + QCOUNT + " 정답";
+    fillTermStrip($("resTerms"));
+    renderHistory($("histMatch"), state.match.history, state.match.score);
+    renderHistory($("histQuiz"), state.quiz.history, state.quiz.score);
+
+    const wrongWrap = $("resWrongWrap");
+    const wrongEl = $("resWrong");
+    wrongEl.innerHTML = "";
+    if(state.quiz.wrong.length){
+      wrongWrap.hidden = false;
+      state.quiz.wrong.forEach(function(it){
+        const ans = it.type === "ox" ? (it.a ? "O" : "X") : it.a;
+        const d = document.createElement("div");
+        d.className = "wrongitem";
+        d.innerHTML = it.q + '<br><b>정답 ' + ans + '</b> · ' + it.why;
+        wrongEl.appendChild(d);
+      });
+    }else{
+      wrongWrap.hidden = true;
+    }
+    show("scResult");
+  }
+
+  /* ====================== 결과 이미지 ====================== */
+  function drawResult(){
+    const W = 1000, H = 920, S = 2;
+    const cv = document.createElement("canvas");
+    cv.width = W * S; cv.height = H * S;
+    const c = cv.getContext("2d");
+    c.scale(S, S);
+
+    const INK = "#16251A", PEA = "#4FA22F", POLLEN_SOFT = "#FFF1C9",
+          BLOSSOM = "#F4538A", PAPER = "#FFFFFF", SOFT = "#F1F6EA",
+          PEASOFT = "#DDF0CE", MUTED = "#5C6F5F";
+
+    function rr(x,y,w,h,r){
+      c.beginPath();
+      c.moveTo(x+r,y); c.arcTo(x+w,y,x+w,y+h,r); c.arcTo(x+w,y+h,x,y+h,r);
+      c.arcTo(x,y+h,x,y,r); c.arcTo(x,y,x+w,y,r); c.closePath();
+    }
+    function sticker(x,y,w,h,fill,r){
+      r = r || 18;
+      c.fillStyle = INK; rr(x+5,y+6,w,h,r); c.fill();
+      c.fillStyle = fill; rr(x,y,w,h,r); c.fill();
+      c.lineWidth = 3; c.strokeStyle = INK; rr(x,y,w,h,r); c.stroke();
+    }
+    function txt(s,x,y,size,font,color,align){
+      c.fillStyle = color; c.textAlign = align || "left"; c.textBaseline = "alphabetic";
+      c.font = (font === "han" ? size+'px "Black Han Sans", sans-serif' : '800 '+size+'px "Gothic A1", sans-serif');
+      c.fillText(s,x,y);
+    }
+
+    // ground
+    c.fillStyle = SOFT; c.fillRect(0,0,W,H);
+    c.strokeStyle = INK; c.lineWidth = 8; c.strokeRect(4,4,W-8,H-8);
+
+    // header
+    txt("유전 용어 마스터", 46, 78, 46, "han", INK);
+    txt("Ⅴ. 생식과 유전 · 멘델이 밝힌 유전 원리 · 유전 기본 용어 13", 46, 108, 16, "goth", MUTED);
+    // 반+닉네임
+    c.textAlign = "right";
+    txt(state.player, W-46, 76, 26, "han", INK, "right");
+    const d = new Date();
+    txt(d.getFullYear()+"."+(d.getMonth()+1)+"."+d.getDate(), W-46, 104, 15, "goth", MUTED, "right");
+    c.textAlign = "left";
+
+    c.strokeStyle = INK; c.lineWidth = 3;
+    c.beginPath(); c.moveTo(46,128); c.lineTo(W-46,128); c.stroke();
+
+    // big total
+    const total = totalScore();
+    sticker(46,152,440,196, POLLEN_SOFT, 20);
+    txt("총점 · 두 게임 최고 기록 평균", 76, 196, 17, "goth", MUTED);
+    c.font = '92px "Black Han Sans", sans-serif';
+    const totalW = c.measureText(String(total)).width;
+    txt(String(total), 76, 292, 92, "han", PEA);
+    txt("/ 100", 76 + totalW + 14, 292, 24, "han", MUTED);
+    // rank badge
+    const rank = rankOf(total);
+    c.font = '22px "Black Han Sans", sans-serif';
+    const rw = c.measureText(rank).width + 44;
+    sticker(462-rw, 294, rw, 42, BLOSSOM, 21);
+    txt(rank, 462-rw+rw/2, 322, 22, "han", "#FFFFFF", "center");
+
+    // two game boxes
+    sticker(510,152,444,92, PAPER, 18);
+    txt("MINI GAME 1 · 완두 짝 맞추기 최고", 536, 186, 15, "goth", MUTED);
+    txt(state.match.score + "점", 536, 226, 30, "han", INK);
+    txt(state.match.history.length + "번 도전", 930, 226, 14, "goth", MUTED, "right");
+
+    sticker(510,256,444,92, PAPER, 18);
+    txt("MINI GAME 2 · 용어 골든벨 최고", 536, 290, 15, "goth", MUTED);
+    txt(state.quiz.score + "점", 536, 330, 30, "han", INK);
+    txt(state.quiz.correct + " / " + QCOUNT + " 정답 · " + state.quiz.history.length + "번 도전", 930, 330, 14, "goth", MUTED, "right");
+
+    // 최고 기록의 라운드별 상세
+    sticker(46,376,908,116, PAPER, 18);
+    txt("짝 맞추기 라운드별 기록 (최고 기록 회차)", 76, 410, 15, "goth", MUTED);
+    state.match.rounds.forEach(function(r, i){
+      const x = 76 + i * 296;
+      txt("R" + (i+1) + " " + r.title, x, 442, 16, "goth", INK);
+      txt(r.score + "점", x, 474, 24, "han", PEA);
+      txt("실패 " + r.misses + "회", x + 86, 473, 14, "goth", MUTED);
+    });
+
+    // 도전 기록 (누적)
+    sticker(46,516,908,132, PAPER, 18);
+    txt("도전 기록", 76, 550, 15, "goth", MUTED);
+    histLine("완두 짝 맞추기", state.match.history, state.match.score, 588);
+    histLine("용어 골든벨", state.quiz.history, state.quiz.score, 628);
+
+    function histLine(label, hist, best, y){
+      txt(label, 76, y, 16, "goth", INK);
+      let hx = 250, bestShown = false;
+      hist.slice(-8).forEach(function(h){
+        const s = h.n + "차 " + h.score + "점";
+        c.font = '800 15px "Gothic A1", sans-serif';
+        const bw = c.measureText(s).width + 26;
+        if(hx + bw > 928) return;
+        const isBest = (h.score === best) && !bestShown;
+        if(isBest) bestShown = true;
+        c.fillStyle = isBest ? PEASOFT : SOFT; rr(hx, y-20, bw, 29, 14); c.fill();
+        c.lineWidth = 2.5; c.strokeStyle = isBest ? PEA : "#D2E2C6"; rr(hx, y-20, bw, 29, 14); c.stroke();
+        txt(s, hx + bw/2, y, 15, "goth", INK, "center");
+        hx += bw + 8;
+      });
+    }
+
+    // terms
+    sticker(46,672,908,192, PAPER, 18);
+    txt("오늘 익힌 유전 용어", 76, 706, 15, "goth", MUTED);
+    let cx = 76, cy = 736;
+    c.font = '18px "Black Han Sans", sans-serif';
+    TERM_ORDER.forEach(function(k){
+      const t = TERMS[k].t;
+      const w = c.measureText(t).width + 30;
+      if(cx + w > 924){ cx = 76; cy += 50; }
+      c.fillStyle = PEASOFT; rr(cx, cy-26, w, 38, 19); c.fill();
+      c.lineWidth = 2.5; c.strokeStyle = INK; rr(cx, cy-26, w, 38, 19); c.stroke();
+      txt(t, cx + w/2, cy, 18, "han", INK, "center");
+      c.font = '18px "Black Han Sans", sans-serif';
+      cx += w + 10;
+    });
+
+    txt("수진T의 중학교 과학 LAB", W/2, 898, 14, "goth", MUTED, "center");
+
+    return cv;
+  }
+
+  $("btnSave").addEventListener("click", function(){
+    const btn = $("btnSave");
+    btn.disabled = true;
+    const orig = btn.textContent;
+    btn.textContent = "만드는 중…";
+    const fonts = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+    fonts.then(function(){
+      let cv;
+      try{ cv = drawResult(); }
+      catch(e){ toast("이미지를 만들지 못했어요."); btn.disabled = false; btn.textContent = orig; return; }
+      cv.toBlob(function(blob){
+        btn.disabled = false; btn.textContent = orig;
+        if(!blob){ toast("이미지를 만들지 못했어요."); return; }
+        const safeTag = state.player.replace(/[\\/:*?"<>|\s]+/g, "_");
+        const filename = (safeTag ? safeTag + "_" : "") + "유전용어마스터.png";
+        offerDownload(blob, filename, cv);
+      }, "image/png");
+    });
+  });
+
+  function offerDownload(blob, filename, cv){
+    /* 일반 웹사이트(GitHub Pages 등)에서는 바로 내려받기 */
+    if(!(window.claude && typeof window.claude.use === "function")){
+      try{
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url; a.download = filename;
+        document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
+        toast("결과 이미지를 저장했어요!");
+      }catch(e){ previewModal(cv); }
+      return;
+    }
+    window.claude.use("downloads").then(function(dl){
+      if(!dl){ previewModal(cv); return; }
+      dl.save({filename:filename, data:blob}).then(function(){
+        toast("결과 이미지를 저장했어요!");
+      }).catch(function(err){
+        const code = err && err.code;
+        if(code === "declined") return;
+        previewModal(cv);
+      });
+    }).catch(function(){ previewModal(cv); });
+  }
+
+  function previewModal(cv){
+    const wrap = document.createElement("div");
+    wrap.className = "modal";
+    wrap.innerHTML =
+      '<div class="panel stack">' +
+        '<div><div class="eyebrow">결과 이미지</div>' +
+        '<p class="muted" style="margin:4px 0 0; font-size:.85rem">이미지를 길게 누르거나 마우스 오른쪽 버튼을 눌러 저장한 뒤 제출하세요.</p></div>' +
+        '<img class="preview" alt="활동 결과 이미지">' +
+        '<div class="row" style="justify-content:center"><button class="btn ghost" id="pvClose">닫기</button></div>' +
+      '</div>';
+    document.body.appendChild(wrap);
+    wrap.querySelector("img").src = cv.toDataURL("image/png");
+    wrap.querySelector("#pvClose").addEventListener("click", function(){ wrap.remove(); });
+  }
+})();
+</script>
+
+</body></html>
