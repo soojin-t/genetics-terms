@@ -378,7 +378,7 @@
       <svg class="pod" viewBox="0 0 56 56" aria-hidden="true"><path d="M10 46C4 32 14 12 30 7c8-2.5 16-1 19 3-3 3-4 8-3 14 2 12-8 26-20 30-8 2.7-13.5 0-16-8z" fill="var(--pea)" stroke="var(--edge)" stroke-width="3" stroke-linejoin="round"/><circle cx="19" cy="37" r="5.2" fill="var(--pollen)" stroke="var(--edge)" stroke-width="2.4"/><circle cx="27" cy="27" r="5.2" fill="var(--pollen)" stroke="var(--edge)" stroke-width="2.4"/><circle cx="35" cy="17" r="5.2" fill="var(--pollen)" stroke="var(--edge)" stroke-width="2.4"/></svg>
       <b>유전 용어 마스터</b>
     </div>
-    <span class="chip pea" id="chipStudent" hidden></span>
+    <span class="chip pea" id="chipPlayer" hidden></span>
     <span class="chip pollen" id="chipScore" hidden>총점 <b>0</b></span>
   </div>
 
@@ -392,18 +392,12 @@
 
     <div class="panel stack" style="margin-top:20px">
       <div>
-        <div class="eyebrow">먼저 이름을 적어 주세요</div>
-        <p class="muted" style="margin:4px 0 0; font-size:.86rem">활동을 마치면 결과 이미지에 학번과 이름이 함께 들어갑니다.</p>
+        <div class="eyebrow">먼저 반과 닉네임을 적어 주세요</div>
+        <p class="muted" style="margin:4px 0 0; font-size:.86rem">활동을 마치면 결과 이미지에 반과 닉네임이 함께 들어갑니다.</p>
       </div>
-      <div class="grid2">
-        <div class="field">
-          <label for="inNo">학번</label>
-          <input id="inNo" type="text" inputmode="numeric" maxlength="8" placeholder="예) 30412" autocomplete="off">
-        </div>
-        <div class="field">
-          <label for="inName">이름</label>
-          <input id="inName" type="text" maxlength="12" placeholder="예) 김완두" autocomplete="off">
-        </div>
+      <div class="field">
+        <label for="inPlayer">반+닉네임</label>
+        <input id="inPlayer" type="text" maxlength="24" placeholder="예) 3반 완두왕" autocomplete="off">
       </div>
       <div class="row" style="justify-content:flex-end">
         <button class="btn pea" id="btnStart">도전 시작</button>
@@ -732,7 +726,7 @@
   /* ====================== 상태 ====================== */
   /* score / correct / maxCombo = 최고 기록, history = 도전할 때마다 쌓이는 기록 */
   const state = {
-    student:{no:"", name:""},
+    player:"",
     match:{done:false, rounds:[], score:0, history:[]},
     quiz:{done:false, score:0, correct:0, maxCombo:0, wrong:[], history:[]}
   };
@@ -806,18 +800,16 @@
 
   /* ====================== 인트로 ====================== */
   $("btnStart").addEventListener("click", function(){
-    const no = $("inNo").value.trim();
-    const name = $("inName").value.trim();
-    if(!no){ toast("학번을 입력해 주세요."); $("inNo").focus(); return; }
-    if(!name){ toast("이름을 입력해 주세요."); $("inName").focus(); return; }
-    state.student.no = no; state.student.name = name;
-    $("chipStudent").hidden = false;
-    $("chipStudent").textContent = no + " " + name;
+    const tag = $("inPlayer").value.trim();
+    if(!tag){ toast("반과 닉네임을 입력해 주세요."); $("inPlayer").focus(); return; }
+    state.player = tag;
+    $("chipPlayer").hidden = false;
+    $("chipPlayer").textContent = tag;
     $("chipScore").hidden = false;
     updateHub();
     show("scHub");
   });
-  $("inName").addEventListener("keydown", function(e){ if(e.key === "Enter") $("btnStart").click(); });
+  $("inPlayer").addEventListener("keydown", function(e){ if(e.key === "Enter") $("btnStart").click(); });
 
   /* ====================== 허브 ====================== */
   function updateHub(){
@@ -1216,7 +1208,7 @@
     $("resQuiz").textContent  = String(state.quiz.score);
     $("resCombo").textContent = String(state.quiz.maxCombo);
     $("rankBadge").textContent = rankOf(total);
-    $("resWho").textContent = state.student.no + " " + state.student.name
+    $("resWho").textContent = state.player
       + " · 골든벨 최고 기록 " + state.quiz.correct + " / " + QCOUNT + " 정답";
     fillTermStrip($("resTerms"));
     renderHistory($("histMatch"), state.match.history, state.match.score);
@@ -1276,9 +1268,9 @@
     // header
     txt("유전 용어 마스터", 46, 78, 46, "han", INK);
     txt("Ⅴ. 생식과 유전 · 멘델이 밝힌 유전 원리 · 유전 기본 용어 13", 46, 108, 16, "goth", MUTED);
-    // student
+    // 반+닉네임
     c.textAlign = "right";
-    txt(state.student.no + "  " + state.student.name, W-46, 76, 26, "han", INK, "right");
+    txt(state.player, W-46, 76, 26, "han", INK, "right");
     const d = new Date();
     txt(d.getFullYear()+"."+(d.getMonth()+1)+"."+d.getDate(), W-46, 104, 15, "goth", MUTED, "right");
     c.textAlign = "left";
@@ -1379,7 +1371,8 @@
       cv.toBlob(function(blob){
         btn.disabled = false; btn.textContent = orig;
         if(!blob){ toast("이미지를 만들지 못했어요."); return; }
-        const filename = state.student.no + "_" + state.student.name + "_유전용어마스터.png";
+        const safeTag = state.player.replace(/[\\/:*?"<>|\s]+/g, "_");
+        const filename = (safeTag ? safeTag + "_" : "") + "유전용어마스터.png";
         offerDownload(blob, filename, cv);
       }, "image/png");
     });
