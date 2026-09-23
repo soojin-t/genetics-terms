@@ -59,7 +59,7 @@
   body{
     margin:0; background:var(--bg); color:var(--ink);
     font-family:"Gothic A1","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
-    font-size:16px; line-height:1.6;
+    font-size:17px; line-height:1.6;
     -webkit-text-size-adjust:100%;
   }
   h1,h2,h3,.display{font-family:"Black Han Sans","Gothic A1",sans-serif; font-weight:400; letter-spacing:.01em;}
@@ -79,13 +79,13 @@
     display:inline-flex; align-items:center; gap:6px;
     border:2.5px solid var(--edge); border-radius:999px;
     background:var(--surface); padding:3px 11px;
-    font-size:.8rem; font-weight:800; white-space:nowrap;
+    font-size:.88rem; font-weight:800; white-space:nowrap;
   }
   .chip.pea{background:var(--pea-soft)}
   .chip.pollen{background:var(--pollen-soft)}
   .chip.blossom{background:var(--blossom-soft)}
   .chip.teach{background:var(--blossom); color:#fff}
-  .chip b{font-family:"Black Han Sans",sans-serif; font-weight:400; font-size:.95rem; font-variant-numeric:tabular-nums;}
+  .chip b{font-family:"Black Han Sans",sans-serif; font-weight:400; font-size:1.05rem; font-variant-numeric:tabular-nums;}
 
   /* ---------- shared bits ---------- */
   .panel{
@@ -110,7 +110,7 @@
     outline:3px solid var(--blossom); outline-offset:3px;
   }
   .eyebrow{
-    font-size:.72rem; font-weight:800; letter-spacing:.14em;
+    font-size:.8rem; font-weight:800; letter-spacing:.14em;
     color:var(--muted); text-transform:uppercase;
   }
   .muted{color:var(--muted)}
@@ -128,9 +128,9 @@
   .hero h1 em{font-style:normal; color:var(--pea)}
   .hero p{margin:0; color:var(--muted); font-size:.95rem}
   .field{display:flex; flex-direction:column; gap:6px}
-  .field label{font-size:.82rem; font-weight:800; letter-spacing:.02em}
+  .field label{font-size:.92rem; font-weight:800; letter-spacing:.02em}
   .field input{
-    font-family:inherit; font-size:1rem; font-weight:600;
+    font-family:inherit; font-size:1.08rem; font-weight:600;
     border:3px solid var(--edge); border-radius:12px;
     background:var(--surface-2); color:var(--ink);
     padding:10px 13px; width:100%;
@@ -142,8 +142,8 @@
   .termstrip{display:flex; flex-wrap:wrap; gap:6px; justify-content:center}
   .term-chip{
     border:2.5px solid var(--edge); border-radius:999px;
-    background:var(--pea-soft); padding:3px 10px;
-    font-size:.78rem; font-weight:800;
+    background:var(--pea-soft); padding:4px 12px;
+    font-size:.88rem; font-weight:800;
   }
 
   /* ---------- hub ---------- */
@@ -157,26 +157,27 @@
   }
   .gamecard:hover{transform:translate(2px,2px); box-shadow:var(--shadow-sm)}
   .gamecard .num{
-    font-family:"Black Han Sans",sans-serif; font-size:.8rem;
+    font-family:"Black Han Sans",sans-serif; font-size:.88rem;
     border:2.5px solid var(--edge); border-radius:999px;
-    padding:2px 10px; align-self:flex-start; background:var(--pollen-soft);
+    padding:2px 11px; align-self:flex-start; background:var(--pollen-soft);
   }
-  .gamecard h3{font-size:1.35rem; margin:0}
-  .gamecard p{margin:0; font-size:.88rem; color:var(--muted); line-height:1.55}
+  .gamecard h3{font-size:1.55rem; margin:0}
+  .gamecard p{margin:0; font-size:1rem; color:var(--muted); line-height:1.6}
   .gamecard .state{
-    margin-top:2px; font-size:.82rem; font-weight:800;
+    margin-top:2px; font-size:.92rem; font-weight:800;
     display:flex; align-items:center; gap:7px;
   }
   .dot{width:11px; height:11px; border-radius:50%; border:2.5px solid var(--edge); background:var(--surface-2); flex:none}
   .dot.on{background:var(--good)}
 
   /* ---------- match game ---------- */
-  .board{display:grid; gap:11px; grid-template-columns:repeat(4,1fr)}
-  .board.cols5{grid-template-columns:repeat(5,1fr)}
-  @media (max-width:760px){ .board, .board.cols5{grid-template-columns:repeat(3,1fr)} }
-  @media (max-width:520px){ .board, .board.cols5{grid-template-columns:repeat(2,1fr)} }
+  .board{display:grid; gap:11px; grid-template-columns:repeat(4,minmax(0,1fr))}
+  .board.cols5{grid-template-columns:repeat(5,minmax(0,1fr))}
+  /* 태블릿에서는 열을 줄여 카드를 넓게 — 뜻 글씨가 작아지지 않도록 */
+  @media (max-width:1000px){ .board, .board.cols5{grid-template-columns:repeat(3,minmax(0,1fr))} }
+  @media (max-width:620px){ .board, .board.cols5{grid-template-columns:repeat(2,minmax(0,1fr))} }
   .card{
-    position:relative; aspect-ratio:1/1.18; min-height:118px;
+    position:relative; min-height:178px; min-width:0;
     border:0; background:none; padding:0; cursor:pointer;
     perspective:900px; font:inherit; color:inherit;
   }
@@ -197,15 +198,15 @@
   .face.front.term{background:var(--pollen-soft)}
   .face.front.def{background:var(--surface)}
   .face .kind{
-    font-size:.6rem; font-weight:800; letter-spacing:.12em;
+    font-size:.7rem; font-weight:800; letter-spacing:.12em;
     color:var(--muted); text-transform:uppercase;
   }
   .face .word{
     font-family:"Black Han Sans",sans-serif; font-weight:400;
-    font-size:clamp(1.05rem,4.3vw,1.4rem); line-height:1.2;
+    font-size:clamp(1.25rem,4.6vw,1.65rem); line-height:1.2;
   }
   .face .defn{
-    font-size:clamp(.71rem,2.55vw,.83rem); line-height:1.4;
+    font-size:20px; line-height:1.45;
     font-weight:600; word-break:keep-all;
   }
   .card.matched .face.front{background:var(--good-soft); border-color:var(--good)}
@@ -221,7 +222,7 @@
   }
   .previewbar .ptext{margin-right:auto; line-height:1.3}
   .previewbar .ptext strong{
-    display:block; font-family:"Black Han Sans",sans-serif; font-weight:400; font-size:1.05rem;
+    display:block; font-family:"Black Han Sans",sans-serif; font-weight:400; font-size:1.2rem;
   }
   .previewbar .timer{margin:0; flex-basis:100%; height:12px}
   .previewbar .timer i{background:var(--blossom)}
@@ -245,45 +246,46 @@
   .timer.warn i{background:var(--bad)}
   .qtext{
     font-family:"Black Han Sans",sans-serif; font-weight:400;
-    font-size:clamp(1.1rem,4.4vw,1.5rem); line-height:1.45;
+    font-size:clamp(1.3rem,4.6vw,1.8rem); line-height:1.45;
     word-break:keep-all; text-wrap:balance; margin:0 0 18px;
   }
   .opts{display:grid; gap:10px}
   .opts.ox{grid-template-columns:1fr 1fr}
   .opt{
     font:inherit; font-weight:800; text-align:left; cursor:pointer;
+    font-size:clamp(1rem,1.9vw,1.15rem); line-height:1.45;
     border:3px solid var(--edge); border-radius:14px; background:var(--surface);
-    box-shadow:var(--shadow-sm); padding:14px 16px; color:inherit;
-    display:flex; align-items:center; gap:11px; word-break:keep-all;
+    box-shadow:var(--shadow-sm); padding:16px 18px; color:inherit;
+    display:flex; align-items:center; gap:12px; word-break:keep-all;
     transition:transform .08s, box-shadow .08s;
   }
   .opt:hover:not([disabled]){transform:translate(1px,1px); box-shadow:2px 2px 0 var(--edge)}
   .opt .badge{
-    width:28px; height:28px; flex:none; border-radius:50%;
+    width:33px; height:33px; flex:none; border-radius:50%;
     border:2.5px solid var(--edge); background:var(--pollen-soft);
     display:grid; place-items:center;
-    font-family:"Black Han Sans",sans-serif; font-size:.85rem;
+    font-family:"Black Han Sans",sans-serif; font-size:1rem;
   }
   .opts.ox .opt{
     flex-direction:column; gap:4px; align-items:center; text-align:center;
-    padding:22px 12px; font-family:"Black Han Sans",sans-serif; font-weight:400;
-    font-size:1.8rem;
+    padding:26px 12px; font-family:"Black Han Sans",sans-serif; font-weight:400;
+    font-size:2.3rem;
   }
-  .opts.ox .opt small{font-family:"Gothic A1",sans-serif; font-weight:800; font-size:.8rem; color:var(--muted)}
+  .opts.ox .opt small{font-family:"Gothic A1",sans-serif; font-weight:800; font-size:.95rem; color:var(--muted)}
   .opt.correct{background:var(--good-soft); border-color:var(--good)}
   .opt.wrong{background:var(--bad-soft); border-color:var(--bad)}
   .opt[disabled]{cursor:default}
   .feedback{
     margin-top:16px; border:3px solid var(--edge); border-radius:14px;
-    padding:12px 15px; font-size:.87rem; font-weight:600; line-height:1.5;
+    padding:14px 17px; font-size:clamp(.95rem,1.8vw,1.08rem); font-weight:600; line-height:1.55;
     word-break:keep-all;
   }
   .feedback.ok{background:var(--good-soft)}
   .feedback.no{background:var(--bad-soft)}
   .feedback b{font-family:"Black Han Sans",sans-serif; font-weight:400}
   .combo{
-    font-family:"Black Han Sans",sans-serif; font-size:.9rem;
-    color:var(--blossom); min-width:64px;
+    font-family:"Black Han Sans",sans-serif; font-size:1rem;
+    color:var(--blossom); min-width:70px;
   }
 
   /* ---------- summary / result ---------- */
@@ -297,7 +299,7 @@
     font-family:"Black Han Sans",sans-serif; font-size:2.1rem; line-height:1.1;
     font-variant-numeric:tabular-nums; display:block;
   }
-  .scorebox .k{font-size:.78rem; font-weight:800; color:var(--muted)}
+  .scorebox .k{font-size:.86rem; font-weight:800; color:var(--muted)}
   .scorebox.big{background:var(--pollen-soft); grid-column:1/-1}
   .scorebox.big .v{font-size:3.3rem; color:var(--pea)}
   .rank{
@@ -314,7 +316,7 @@
   .histrow{
     display:flex; align-items:center; gap:9px;
     border:2.5px solid var(--line); border-radius:11px; padding:7px 12px;
-    background:var(--surface-2); font-size:.85rem; font-weight:800;
+    background:var(--surface-2); font-size:.95rem; font-weight:800;
   }
   .histrow.best{border-color:var(--pea); background:var(--pea-soft)}
   .histrow .tag{
@@ -330,8 +332,8 @@
   .wronglist{display:flex; flex-direction:column; gap:9px; margin-top:6px}
   .wrongitem{
     border:2.5px solid var(--line); border-left:7px solid var(--bad);
-    border-radius:11px; padding:10px 13px; background:var(--surface-2);
-    font-size:.85rem; line-height:1.5; word-break:keep-all;
+    border-radius:11px; padding:12px 15px; background:var(--surface-2);
+    font-size:clamp(.95rem,1.8vw,1.06rem); line-height:1.6; word-break:keep-all;
   }
   .wrongitem b{font-family:"Black Han Sans",sans-serif; font-weight:400; color:var(--pea)}
   .preview{width:100%; height:auto; border:3px solid var(--edge); border-radius:14px; display:block}
@@ -341,7 +343,7 @@
   .glossgroup:last-child{margin-bottom:0}
   .glossgroup > .eyebrow{display:block; margin-bottom:8px}
   .glossitem{
-    display:grid; grid-template-columns:118px 1fr; gap:12px; align-items:baseline;
+    display:grid; grid-template-columns:132px 1fr; gap:14px; align-items:baseline;
     border-bottom:2px dashed var(--line); padding:9px 2px;
   }
   .glossitem:last-child{border-bottom:0}
@@ -349,10 +351,10 @@
     .glossitem{grid-template-columns:1fr; gap:2px}
   }
   .glossitem .gt{
-    font-family:"Black Han Sans",sans-serif; font-weight:400; font-size:1.05rem;
+    font-family:"Black Han Sans",sans-serif; font-weight:400; font-size:1.22rem;
     color:var(--pea); display:flex; align-items:center; gap:6px; flex-wrap:wrap;
   }
-  .glossitem .gd{font-size:.87rem; line-height:1.55; word-break:keep-all}
+  .glossitem .gd{font-size:clamp(.96rem,1.8vw,1.08rem); line-height:1.6; word-break:keep-all}
 
   .toast{
     position:fixed; left:50%; bottom:26px; transform:translateX(-50%);
